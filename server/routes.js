@@ -4,11 +4,11 @@ const Article = configMongoose.Article;
 
 
 const PublishingAppRoutes = [
-  ...sessionRoutes, 
+  ...sessionRoutes,
   {
     route: 'articles.length',
     get: () => Article.count({}, (err, count) => count)
-      .then ((articlesCountInDB) => {
+      .then((articlesCountInDB) => {
         return {
           path: ['articles', 'length'],
           value: articlesCountInDB
@@ -21,7 +21,7 @@ const PublishingAppRoutes = [
       const articlesIndex = pathSet[1];
 
       return Article.find({}, (err, articlesDocs) => articlesDocs)
-        .then ((articlesArrayFromDB) => {
+        .then((articlesArrayFromDB) => {
           let results = [];
 
           articlesIndex.forEach((index) => {

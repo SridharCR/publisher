@@ -23,21 +23,19 @@ class PublishingApp extends React.Component {
   }
 
   async _fetch() {
-    const articlesLength = await falcorModel.
-      getValue('articles.length')
-        .then((length) => length);
+    const articlesLength = await falcorModel.getValue('articles.length').then((length) => length);
 
     const articles = await falcorModel.
       get(['articles',
-        {from: 0, to: articlesLength-1},
-        ['id','articleTitle', 'articleContent']])
-        .then((articlesResponse) => articlesResponse.json.articles);
+        { from: 0, to: articlesLength - 1 },
+        ['id', 'articleTitle', 'articleContent']])
+      .then((articlesResponse) => articlesResponse.json.articles);
 
     this.props.articleActions.articlesList(articles);
   }
 
   // below here are next methods o the PublishingApp
-  render () {
+  render() {
     let articlesJSX = [];
 
     for (let articleKey in this.props.article) {

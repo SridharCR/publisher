@@ -7,10 +7,9 @@ const User = configMongoose.User;
 
 export default [
   {
-    route: ['login'] ,
-    call: (callPath, args) =>
-    {
-      const {username, password} = args[0];
+    route: ['login'],
+    call: (callPath, args) => {
+      const { username, password } = args[0];
       const saltedPassword = password + 'pubApp'; // pubApp is our salt string
       const saltedPassHash = crypto.createHash('sha256').update(saltedPassword).digest('hex');
       const userStatementQuery = {
@@ -20,12 +19,10 @@ export default [
         ]
       }
 
-      return User.find(userStatementQuery, (err, user) => {
-        if (err) throw err;
-      }).then((result) => {
+      return User.find(userStatementQuery, (err, user) => { if (err) throw err; }).then((result) => {
         if (result.length) {
           const role = result[0].role;
-          const userDetailsToHash = username+role;
+          const userDetailsToHash = username + role;
           const token = jwt.sign(userDetailsToHash, jwtSecret.secret);
 
           return [
@@ -45,7 +42,7 @@ export default [
               path: ['login', 'error'],
               value: false
             }
-          ]; 
+          ];
         } else {
           return [
             {
@@ -69,48 +66,40 @@ export default [
       const newUserObj = args[0];
 
       newUserObj.password = newUserObj.password + 'pubApp';
-      newUserObj.password = crypto
-        .createHash('sha256')
-        .update(newUserObj.password)
-        .digest('hex');
+      newUserObj.password = crypto.createHash('sha256').update(newUserObj.password).digest('hex');
 
       const newUser = new User(newUserObj);
 
-      return newUser.save((err, data) => {
-          if (err) {
-            throw err;
-          }
-        })
-        .then((newRes) => {
-          const newUserDetail = newRes.toObject();
+      return newUser.save((err, data) => { if (err) { throw err; } }).then((newRes) => {
+        const newUserDetail = newRes.toObject();
 
-          if (newUserDetail._id) {
-            const newUserId = newUserDetail._id.toString();
+        if (newUserDetail._id) {
+          const newUserId = newUserDetail._id.toString();
 
-            return [
-              {
-                path: ['register', 'newUserId'],
-                value: newUserId
-              },
-              {
-                path: ['register', 'error'],
-                value: false
-              }
-            ];
+          return [
+            {
+              path: ['register', 'newUserId'],
+              value: newUserId
+            },
+            {
+              path: ['register', 'error'],
+              value: false
+            }
+          ];
 
-          } else {
-            return [
-              {
-                path: ['register', 'newUserId'],
-                value: 'INVALID'
-              },
-              {
-                path: ['register', 'error'],
-                value: 'Registration failed - no id has been created'
-              }
-            ];
-          }
-        }).catch((reason) => console.error(reason));
+        } else {
+          return [
+            {
+              path: ['register', 'newUserId'],
+              value: 'INVALID'
+            },
+            {
+              path: ['register', 'error'],
+              value: 'Registration failed - no id has been created'
+            }
+          ];
+        }
+      }).catch((reason) => console.error(reason));
     }
   }
 

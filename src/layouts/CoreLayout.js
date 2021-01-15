@@ -1,20 +1,20 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 class CoreLayout extends React.Component {
 
 	static propTypes = {
-	children : React.PropTypes.element
+		children: React.PropTypes.element
 	}
-	render () {
+	render() {
 		return (
 			<div>
-			<span>
-			Links: Links:<Link to='/register'>Register</Link>
-			<Link to='/login'>Login</Link> |
+				<span>
+					Links: Links:<Link to='/register'>Register</Link>
+					<Link to='/login'>Login</Link> |
 			<Link to='/'>Home Page</Link>
-			</span>
-			<br/>
-			{this.props.children}
+				</span>
+				<br />
+				{this.props.children}
 			</div>
 		);
 	}

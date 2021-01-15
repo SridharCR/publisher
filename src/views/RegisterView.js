@@ -9,33 +9,33 @@ const mapStateToProps = (state) => ({ ...state });
 
 const mapDispatchToProps = (dispatch) => ({});
 class RegisterView extends React.Component {
+
 	constructor(props) {
 		super(props);
 		this.register = this.register.bind(this);
-		this.state = {
-		error: null
-		};
+		this.state = { error: null };
 	}
-	async register (newUserModel) {
+
+	async register(newUserModel) {
 		console.info("newUserModel", newUserModel);
-		await falcorModel.call(['register'],[newUserModel]).then((result) =>result);
+		await falcorModel.call(['register'], [newUserModel]).then((result) => result);
 		const newUserId = await falcorModel.getValue(['register', 'newUserId']);
-		if(newUserId === 'INVALID') {
+		if (newUserId === 'INVALID') {
 			const errorRes = await falcorModel.getValue('register.error');
-			this.setState({error: errorRes});
+			this.setState({ error: errorRes });
 			return;
 		}
 		this.props.history.pushState(null, '/login');
 	}
-	render () {
+	
+	render() {
 		return (
-		<div>
-		<h1>Register</h1>
-		<div style={{maxWidth: 450, margin: '0 auto'}}>
-		<RegisterForm
-		onSubmit={this.register} />
-		</div>
-		</div>
+			<div>
+				<h1>Register</h1>
+				<div style={{ maxWidth: 450, margin: '0 auto' }}>
+					<RegisterForm onSubmit={this.register} />
+				</div>
+			</div>
 		);
 	}
 }
