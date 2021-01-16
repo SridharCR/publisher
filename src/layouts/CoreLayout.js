@@ -12,16 +12,14 @@ class CoreLayout extends React.Component {
 		console.log('Inside Core Layout render method')
 
 		return (
-<div>
-<span>
-Links: <Link to='/register'>Register</Link> |
-<Link to='/login'>Login</Link> |
-<Link to='/'>Home Page</Link>
-</span>
-<br/>
-{this.props.children}
-</div>
-);
+			<div>
+				<span>
+					Links: <Link to='/register'>Register</Link> | <Link to='/login'>Login</Link> | <Link to='/'>Home Page</Link>
+				</span>
+				<br />
+				{this.props.children}
+			</div>
+		);
 	}
 }
-export default themeDecorator(getMuiTheme(null, { userAgent: 'all'}))(CoreLayout);
+export default themeDecorator(getMuiTheme(null, { userAgent: 'all' }))(CoreLayout);
