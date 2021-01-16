@@ -23,7 +23,9 @@ class PublishingApp extends React.Component {
   componentWillMount() {
     console.log('Inside PublishingApp component will mount')
 
-    this._fetch();
+    if(typeof window !== 'undefined') {
+	this._fetch(); // we are server side rendering, no fetching
+     }
   }
 
   async _fetch() {

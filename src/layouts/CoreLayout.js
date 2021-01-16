@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
+import themeDecorator from 'material-ui/lib/styles/theme-decorator';
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+
 class CoreLayout extends React.Component {
 
 	static propTypes = {
@@ -9,16 +12,16 @@ class CoreLayout extends React.Component {
 		console.log('Inside Core Layout render method')
 
 		return (
-			<div>
-				<span>
-					Links: Links:<Link to='/register'>Register</Link>
-					<Link to='/login'>Login</Link> |
-			<Link to='/'>Home Page</Link>
-				</span>
-				<br />
-				{this.props.children}
-			</div>
-		);
+<div>
+<span>
+Links: <Link to='/register'>Register</Link> |
+<Link to='/login'>Login</Link> |
+<Link to='/'>Home Page</Link>
+</span>
+<br/>
+{this.props.children}
+</div>
+);
 	}
 }
-export default CoreLayout;
+export default themeDecorator(getMuiTheme(null, { userAgent: 'all'}))(CoreLayout);
