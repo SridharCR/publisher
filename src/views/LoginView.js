@@ -14,12 +14,14 @@ const mapDispatchToProps = (dispatch) => ({});
 
 class LoginView extends React.Component {
   constructor(props) {
+    console.log('Inside Login View constructor')
     super(props);
     this.login = this.login.bind(this);
     this.state = { error: null };
   }
 
   async login(credentials) {
+    console.log('Inside Login View login method')
     await falcorModel.call(['login'], [credentials]).then((result) => result);
     const tokenRes = await falcorModel.getValue('login.token');
 
@@ -42,6 +44,7 @@ class LoginView extends React.Component {
   }
 
   render() {
+    console.log('Inside Login View render method')
     return (
       <div>
         <h1>Login view</h1>

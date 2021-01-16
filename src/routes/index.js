@@ -6,6 +6,8 @@ import LoginView from '../views/LoginView';
 import DashboardView from '../views/DashboardView';
 import RegisterView from '../views/RegisterView';
 
+console.log("Inside routes/index.js")
+
 export default (
 	<Route component={CoreLayout} path='/'>
 	<IndexRoute component={PublishingApp} name='home' />

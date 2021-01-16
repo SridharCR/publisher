@@ -1,4 +1,6 @@
 const article = (state = {}, action) => {
+  console.log('Inside Article reducer')
+
   switch (action.type) {
     case 'RETURN_ALL_ARTICLES':
       return Object.assign({}, state);

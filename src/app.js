@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import {syncReduxAndRouter} from 'redux-simple-router';
+import { syncReduxAndRouter } from 'redux-simple-router';
 import Root from './containers/Root';
 import configureStore from './store/configureStore';
 
@@ -10,11 +10,13 @@ const history = createBrowserHistory();
 
 export const store = configureStore(window.__INITIAL_STATE__);
 
+console.log("Inside src/app.js ")
+
 syncReduxAndRouter(history, store);
 const node = (
 	<Root
-	history={history}
-	store={store} />
+		history={history}
+		store={store} />
 );
 
 ReactDOM.render(node, target);

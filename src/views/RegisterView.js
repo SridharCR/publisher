@@ -11,12 +11,14 @@ const mapDispatchToProps = (dispatch) => ({});
 class RegisterView extends React.Component {
 
 	constructor(props) {
+		console.log('Inside Register View constructor')
 		super(props);
 		this.register = this.register.bind(this);
 		this.state = { error: null };
 	}
 
 	async register(newUserModel) {
+		console.log('Inside Register View register method')
 		console.info("newUserModel", newUserModel);
 		await falcorModel.call(['register'], [newUserModel]).then((result) => result);
 		const newUserId = await falcorModel.getValue(['register', 'newUserId']);
@@ -27,8 +29,9 @@ class RegisterView extends React.Component {
 		}
 		this.props.history.pushState(null, '/login');
 	}
-	
+
 	render() {
+		console.log('Inside Register View render method')
 		return (
 			<div>
 				<h1>Register</h1>

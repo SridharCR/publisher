@@ -6,6 +6,8 @@ class CoreLayout extends React.Component {
 		children: React.PropTypes.element
 	}
 	render() {
+		console.log('Inside Core Layout render method')
+
 		return (
 			<div>
 				<span>

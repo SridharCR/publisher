@@ -11,6 +11,8 @@ const mapDispatchToProps = (dispatch) => ({});
 
 class DashboardView extends React.Component {
 	render() {
+		console.log('Inside Dashboard View render method')
+
 		return (
 			<div>
 				<h1>Dashboard - loggedin!</h1>
