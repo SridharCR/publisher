@@ -11,38 +11,38 @@ class CoreLayout extends React.Component {
 	static propTypes = {
 		children: React.PropTypes.element
 	}
-render () {
-const buttonStyle = {
-margin: 5
-};
-const homeIconStyle = {
-margin: 5,
-paddingTop: 5
-};
-let menuLinksJSX = (
-<span>
-<Link to='/register'>
-<RaisedButton label='Register' style={buttonStyle} />
-</Link>
-<Link to='/login'>
-<RaisedButton label='Login' style={buttonStyle} />
-</Link>
-</span>);
-let homePageButtonJSX = (
-<Link to='/'>
-<RaisedButton label={<ActionHome />}
-style={homeIconStyle} />
-</Link>);
-return (
-<div>
-<AppBar
-title='Publishing App'
-iconElementLeft={homePageButtonJSX}
-iconElementRight={menuLinksJSX} />
-<br/>
-{this.props.children}
-</div>
-);
-}
+	render() {
+		const buttonStyle = {
+			margin: 5
+		};
+		const homeIconStyle = {
+			margin: 5,
+			paddingTop: 5
+		};
+		let menuLinksJSX = (
+			<span>
+				<Link to='/register'>
+					<RaisedButton label='Register' style={buttonStyle} />
+				</Link>
+				<Link to='/login'>
+					<RaisedButton label='Login' style={buttonStyle} />
+				</Link>
+			</span>);
+		let homePageButtonJSX = (
+			<Link to='/'>
+				<RaisedButton label={<ActionHome />}
+					style={homeIconStyle} />
+			</Link>);
+		return (
+			<div>
+				<AppBar
+					title='Publishing App'
+					iconElementLeft={homePageButtonJSX}
+					iconElementRight={menuLinksJSX} />
+				<br />
+				{this.props.children}
+			</div>
+		);
+	}
 }
 export default themeDecorator(getMuiTheme(null, { userAgent: 'all' }))(CoreLayout);

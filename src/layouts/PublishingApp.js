@@ -42,25 +42,25 @@ class PublishingApp extends React.Component {
   }
 
   // below here are next methods o the PublishingApp
-render () {
-let articlesJSX = [];
-for(let articleKey in this.props.article) {
-const articleDetails = this.props.article[articleKey];
-const currentArticleJSX = (
-<div key={articleKey}>
-<ArticleCard
-title={articleDetails.articleTitle}
-content={articleDetails.articleContent} />
-</div>
-);
-articlesJSX.push(currentArticleJSX);
-}
-return (
-<div style={{height: '100%', width: '75%', margin: 'auto'}}>
-{articlesJSX}
-</div>
-);
-}
+  render() {
+    let articlesJSX = [];
+    for (let articleKey in this.props.article) {
+      const articleDetails = this.props.article[articleKey];
+      const currentArticleJSX = (
+        <div key={articleKey}>
+          <ArticleCard
+            title={articleDetails.articleTitle}
+            content={articleDetails.articleContent} />
+        </div>
+      );
+      articlesJSX.push(currentArticleJSX);
+    }
+    return (
+      <div style={{ height: '100%', width: '75%', margin: 'auto' }}>
+        {articlesJSX}
+      </div>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublishingApp);
