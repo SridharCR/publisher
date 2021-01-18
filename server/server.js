@@ -30,9 +30,10 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function (req, res) {
   return new falcorRouter(routes);
 }));
 
-let handleServerSideRender = (req, res, next) => {
+let handleServerSideRender = async (req, res, next) => {
   try {
-    let initMOCKstore = fetchServerSide(); // mocked for now
+    let articlesArray = await fetchServerSide();
+    let initMOCKstore = { article: articlesArray }
     // Create a new Redux store instance
     const store = createStore(rootReducer, initMOCKstore);
     const location = hist.createLocation(req.path);
@@ -51,7 +52,7 @@ let handleServerSideRender = (req, res, next) => {
         res.status(404)
           .send('Not found');
       } else {
-        if (typeofrenderProps === 'undefined') {
+        if (typeof renderProps === 'undefined') {
           // using handleServerSideRender middleware not required;
           // we are not requesting HTML (probably an app.js or other file)
           return;
@@ -70,14 +71,13 @@ let handleServerSideRender = (req, res, next) => {
     next(err)
   }
 }
-let renderFullHtml = (html, initialState) => {
+let renderFullPage = (html, initialState) => {
   return `<!doctype html>
 <html>
 <head>
 <title>Publishing App Server Side Rendering</title>
 </head>
 <body>
-<h1>Server side publishing app</h1>
 <div id="publishingAppRoot">${html}</div>
 <script>
 window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}

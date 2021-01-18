@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import articleActions from '../actions/article.js';
+import ArticleCard from '../components/ArticleCard';
 
 const mapStateToProps = (state) => ({
   ...state
@@ -16,13 +17,11 @@ const mapDispatchToProps = (dispatch) => ({
 class PublishingApp extends React.Component {
   constructor(props) {
     console.log('Inside PublishingApp constructor')
-
     super(props);
   }
 
   componentWillMount() {
     console.log('Inside PublishingApp component will mount')
-
     if (typeof window !== 'undefined') {
       this._fetch(); // we are server side rendering, no fetching
     }
@@ -36,36 +35,32 @@ class PublishingApp extends React.Component {
     const articles = await falcorModel.
       get(['articles',
         { from: 0, to: articlesLength - 1 },
-        ['id', 'articleTitle', 'articleContent']])
+        ['_id', 'articleTitle', 'articleContent']])
       .then((articlesResponse) => articlesResponse.json.articles);
 
     this.props.articleActions.articlesList(articles);
   }
 
   // below here are next methods o the PublishingApp
-  render() {
-    console.log('Inside PublishingApp render method')
-
-    let articlesJSX = [];
-
-    for (let articleKey in this.props.article) {
-      const articleDetails = this.props.article[articleKey];
-      const currentArticleJSX = (
-        <div key={articleKey}>
-          <h2>{articleDetails.articleTitle}</h2>
-          <h3>{articleDetails.articleContent}</h3>
-        </div>);
-
-      articlesJSX.push(currentArticleJSX);
-    }
-
-    return (
-      <div>
-        <h1>Our publishing app</h1>
-        {articlesJSX}
-      </div>
-    );
-  }
+render () {
+let articlesJSX = [];
+for(let articleKey in this.props.article) {
+const articleDetails = this.props.article[articleKey];
+const currentArticleJSX = (
+<div key={articleKey}>
+<ArticleCard
+title={articleDetails.articleTitle}
+content={articleDetails.articleContent} />
+</div>
+);
+articlesJSX.push(currentArticleJSX);
+}
+return (
+<div style={{height: '100%', width: '75%', margin: 'auto'}}>
+{articlesJSX}
+</div>
+);
+}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublishingApp);

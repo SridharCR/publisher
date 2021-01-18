@@ -34,7 +34,6 @@ class RegisterView extends React.Component {
 		console.log('Inside Register View render method')
 		return (
 			<div>
-				<h1>Register</h1>
 				<div style={{ maxWidth: 450, margin: '0 auto' }}>
 					<RegisterForm onSubmit={this.register} />
 				</div>
